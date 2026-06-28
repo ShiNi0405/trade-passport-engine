@@ -1241,6 +1241,20 @@ require_once 'data.php';
   <span id="toast-message">Action completed successfully.</span>
 </div>
 
+<!-- Document Viewer Modal -->
+<div id="document-modal" class="hidden" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 10000; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(4px);">
+  <div style="background: #fff; border-radius: 12px; width: 90%; max-width: 500px; max-height: 90%; overflow: hidden; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.15); display: flex; flex-direction: column;">
+    <div style="padding: 16px 20px; border-bottom: 1px solid #f3f4f6; display: flex; justify-content: space-between; align-items: center; background: #fafafa;">
+      <h3 id="modal-title" style="font-size: 15px; font-weight: 700; color: #1a1a1a; margin: 0;">Source Document Verification</h3>
+      <button onclick="closeDocumentModal()" style="background: none; border: none; font-size: 20px; color: #999; cursor: pointer; line-height: 1; padding: 0 4px;">&times;</button>
+    </div>
+    <div style="padding: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #f9fafb; overflow-y: auto;">
+      <img id="modal-img" src="" style="max-width: 100%; max-height: 420px; object-fit: contain; border-radius: 8px; border: 1px solid #e5e7eb; margin-bottom: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);" />
+      <p id="modal-desc" style="font-size: 12px; color: #444; text-align: center; margin: 0; line-height: 1.5; font-weight: 500;"></p>
+    </div>
+  </div>
+</div>
+
 <script>
 // Seed Data from PHP
 const SEED_DATABASE = <?php echo json_encode($initial_database); ?>;
@@ -1317,6 +1331,24 @@ function showToast(message) {
   setTimeout(() => {
     toast.classList.remove('show');
   }, 3500);
+}
+
+function openDocumentModal(title, imagePath, description) {
+  const modal = document.getElementById('document-modal');
+  const modalTitle = document.getElementById('modal-title');
+  const modalImg = document.getElementById('modal-img');
+  const modalDesc = document.getElementById('modal-desc');
+  
+  modalTitle.textContent = title;
+  modalImg.src = imagePath;
+  modalDesc.innerHTML = description;
+  
+  modal.classList.remove('hidden');
+}
+
+function closeDocumentModal() {
+  const modal = document.getElementById('document-modal');
+  modal.classList.add('hidden');
 }
 
 // Format Currency
@@ -2331,18 +2363,39 @@ function renderIngestInvoices() {
         statusBadge = '<span class="badge b-due">Partial</span>';
       }
       
-      // Clickable triggers for demo
-      const lhdnCell = inv.einvoice === 'verified'
-        ? '<span style="color:#1D9E75; font-weight:bold;">✓</span>'
-        : `<span style="color:#f59e0b; font-weight:bold; cursor:pointer; font-size:14px;" title="Click to verify eInvoice" onclick="verifyInvoiceSource('${cId}', '${inv.invoice_no}', 'einvoice')">⏳</span>`;
-        
-      const bankCell = inv.bank === 'verified'
-        ? '<span style="color:#1D9E75; font-weight:bold;">✓</span>'
-        : `<span style="color:#f59e0b; font-weight:bold; cursor:pointer; font-size:14px;" title="Click to reconcile with Bank" onclick="verifyInvoiceSource('${cId}', '${inv.invoice_no}', 'bank')">⏳</span>`;
-        
-      const doCell = inv.do === 'verified'
-        ? '<span style="color:#1D9E75; font-weight:bold;">✓</span>'
-        : `<span style="color:#f59e0b; font-weight:bold; cursor:pointer; font-size:14px;" title="Click to confirm delivery DO" onclick="verifyInvoiceSource('${cId}', '${inv.invoice_no}', 'do')">⏳</span>`;
+      // Clickable triggers for demo and visual verification viewing
+      let lhdnCell = '';
+      if (inv.einvoice === 'verified') {
+        const title = "LHDN e-Invoice Audit Record";
+        const img = "/example document/WhatsApp Image 2026-06-27 at 16.39.45.jpeg";
+        const desc = `Cryptographic Unique ID: <strong>VD0V0B7M675FBE7312659PJ</strong>.<br>Legitimacy status: <strong>VALID</strong>. Verified via LHDN Identity Server SDK sync.`;
+        lhdnCell = `<span style="color:#1D9E75; font-weight:bold; cursor:pointer;" title="Click to view LHDN e-Invoice Audit" onclick="openDocumentModal('${title}', '${img}', '${desc}')">✓</span>`;
+      } else {
+        lhdnCell = `<span style="color:#f59e0b; font-weight:bold; cursor:pointer; font-size:14px;" title="Click to verify eInvoice" onclick="verifyInvoiceSource('${cId}', '${inv.invoice_no}', 'einvoice')">⏳</span>`;
+      }
+
+      let bankCell = '';
+      if (inv.bank === 'verified') {
+        const title = "Bank Statement Reconciled";
+        const img = "/example document/WhatsApp Image 2026-06-27 at 16.35.33.jpeg";
+        const desc = `Payment received. Settled via direct bank transfer and verified against ledger amount.`;
+        bankCell = `<span style="color:#1D9E75; font-weight:bold; cursor:pointer;" title="Click to view bank reconciliation" onclick="openDocumentModal('${title}', '${img}', '${desc}')">✓</span>`;
+      } else {
+        bankCell = `<span style="color:#f59e0b; font-weight:bold; cursor:pointer; font-size:14px;" title="Click to reconcile with Bank" onclick="verifyInvoiceSource('${cId}', '${inv.invoice_no}', 'bank')">⏳</span>`;
+      }
+
+      let doCell = '';
+      if (inv.do === 'verified') {
+        const isFirst = inv.invoice_no.charCodeAt(inv.invoice_no.length - 1) % 2 === 0;
+        const title = isFirst ? "Signed Delivery Order (DO) Log" : "Site Proof of Delivery (Photo)";
+        const img = isFirst ? "/example document/WhatsApp Image 2026-06-27 at 16.39.52.jpeg" : "/example document/WhatsApp Image 2026-06-27 at 16.37.19.jpeg";
+        const desc = isFirst 
+          ? `Discrepancy logged: <strong>Short 1pc (STANLEY Cut Blade)</strong>.<br>Sticky note memo: <em>'tomorrow we can replace'</em> recorded in audit trail.`
+          : `Geotagged site dispatch photograph uploaded by lorry driver to verify cargo arrival at site.`;
+        doCell = `<span style="color:#1D9E75; font-weight:bold; cursor:pointer;" title="Click to view Delivery Order proof" onclick="openDocumentModal('${title}', '${img}', '${desc}')">✓</span>`;
+      } else {
+        doCell = `<span style="color:#f59e0b; font-weight:bold; cursor:pointer; font-size:14px;" title="Click to confirm delivery DO" onclick="verifyInvoiceSource('${cId}', '${inv.invoice_no}', 'do')">⏳</span>`;
+      }
       
       const tr = document.createElement('tr');
       tr.innerHTML = `
