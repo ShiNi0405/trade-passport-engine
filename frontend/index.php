@@ -2367,7 +2367,7 @@ function renderIngestInvoices() {
       let lhdnCell = '';
       if (inv.einvoice === 'verified') {
         const title = "LHDN e-Invoice Audit Record";
-        const img = "/example document/WhatsApp Image 2026-06-27 at 16.39.45.jpeg";
+        const img = "/example_docs/lhdn_invoice.jpg";
         const desc = `Cryptographic Unique ID: <strong>VD0V0B7M675FBE7312659PJ</strong>.<br>Legitimacy status: <strong>VALID</strong>. Verified via LHDN Identity Server SDK sync.`;
         lhdnCell = `<span style="color:#1D9E75; font-weight:bold; cursor:pointer;" title="Click to view LHDN e-Invoice Audit" onclick="openDocumentModal('${title}', '${img}', '${desc}')">✓</span>`;
       } else {
@@ -2377,7 +2377,7 @@ function renderIngestInvoices() {
       let bankCell = '';
       if (inv.bank === 'verified') {
         const title = "Bank Statement Reconciled";
-        const img = "/example document/WhatsApp Image 2026-06-27 at 16.35.33.jpeg";
+        const img = "/example_docs/bank_reconciliation.jpg";
         const desc = `Payment received. Settled via direct bank transfer and verified against ledger amount.`;
         bankCell = `<span style="color:#1D9E75; font-weight:bold; cursor:pointer;" title="Click to view bank reconciliation" onclick="openDocumentModal('${title}', '${img}', '${desc}')">✓</span>`;
       } else {
@@ -2388,7 +2388,7 @@ function renderIngestInvoices() {
       if (inv.do === 'verified') {
         const isFirst = inv.invoice_no.charCodeAt(inv.invoice_no.length - 1) % 2 === 0;
         const title = isFirst ? "Signed Delivery Order (DO) Log" : "Site Proof of Delivery (Photo)";
-        const img = isFirst ? "/example document/WhatsApp Image 2026-06-27 at 16.39.52.jpeg" : "/example document/WhatsApp Image 2026-06-27 at 16.37.19.jpeg";
+        const img = isFirst ? "/example_docs/delivery_order_sticky.jpg" : "/example_docs/delivery_truck.jpg";
         const desc = isFirst 
           ? `Discrepancy logged: <strong>Short 1pc (STANLEY Cut Blade)</strong>.<br>Sticky note memo: <em>'tomorrow we can replace'</em> recorded in audit trail.`
           : `Geotagged site dispatch photograph uploaded by lorry driver to verify cargo arrival at site.`;
