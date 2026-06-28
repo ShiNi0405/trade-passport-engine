@@ -1,61 +1,96 @@
-<div align="center">
-  
-# 🚀 Trade Passport Engine
-**Next-Generation Contractor Risk Assessment & Frictionless Financing**
+# 🚀 eCredit Bridge (Trade Passport Engine)
+**Mandatory eInvoice Integration for Instant supply Chain Financing**
 
-[![Python](https://img.shields.io/badge/Python-Flask-blue?logo=python&logoColor=white)](#)
-[![PHP](https://img.shields.io/badge/PHP-Frontend-777BB4?logo=php&logoColor=white)](#)
-[![TailwindCSS](https://img.shields.io/badge/TailwindCSS-Styling-38B2AC?logo=tailwind-css&logoColor=white)](#)
-[![Vercel](https://img.shields.io/badge/Vercel-Deployed-000000?logo=vercel&logoColor=white)](#)
+Live Deployment URL: **[https://trade-passport-engine-blond.vercel.app](https://trade-passport-engine-blond.vercel.app)**
 
-</div>
-
-<br/>
+---
 
 ## 💡 The Problem
-In the construction and B2B supply chain industry, late payments and defaults are a massive problem. Suppliers take on 100% of the risk when delivering materials, often waiting 90+ days for payment, crippling their cash flow and stalling business growth.
 
-## 🎯 Our Solution
-**Trade Passport Engine** is an intelligent risk-assessment and financial routing platform. It aggregates payment behaviors, historical data, and real-time **LHDN (Lembaga Hasil Dalam Negeri) e-Invoice** verification to generate a dynamic **"Trade Passport Health"** score for contractors.
-
-By scoring contractors as **Prime, Amber, or Toxic**, our engine allows businesses to make data-driven decisions on whether to extend credit, demand cash upfront, or instantly route invoices to institutional financing partners.
-
----
-
-## ✨ Key Features
-
-- **📊 Dynamic Trade Passport Metrics**: Analyzes Transaction Frequency, Payment Habits (promised vs. actual payment days), Years of Cooperation, and Invoice Amount Trends.
-- **🏛️ Real-time LHDN e-Invoice Sync (Simulated)**: Leverages official tax data to verify transaction legitimacy and ensure compliance.
-- **🚦 Smart Triage Router**: 
-  - 🟢 **Prime**: Frictionless processing for highly reliable payers.
-  - 🟡 **Amber**: Cautionary processing highlighting a history of late payments.
-  - 🔴 **Toxic**: High-default risk alerts requiring explicit manual override to proceed with delivery.
-- **💸 Seamless Institutional Financing**: One-click integration to instantly route eligible Accounts Receivable (AR) to financing partners (like CapBay) for immediate cash flow.
+The Malaysian B2B supply chain suffers from two parallel liquidity bottlenecks:
+1. **Upstream Suppliers (e.g., Defong Enterprise)**: Face severe cash flow constraints as their working capital is locked in 30–90 day Accounts Receivable (AR) payment cycles.
+2. **Downstream Buyers/Contractors (e.g., Ah Kow Construction)**: Have legitimate, high-volume transactional histories but lack collateral, making it extremely difficult to secure traditional bank loans.
+3. **Financiers (e.g., CapBay)**: Are eager to finance SME trades but lack low-cost, fraud-resistant risk assessment data to underwrite these transactions confidently.
 
 ---
 
-## 🛠️ Tech Stack
+## 🏛️ Why Now? The e-Invoice Catalyst
 
-- **Frontend**: PHP, HTML5, TailwindCSS (for a sleek, modern, and responsive UI)
-- **Backend**: Python (Flask API, handling the logic and algorithmic scoring)
-- **Deployment**: Vercel (`vercel.json` configured for seamless serverless deployment)
+Starting in 2024, the Malaysian Government is mandating **e-Invoicing (LHDN)** across all B2B transactions. This creates a critical 3–5 year window:
+- **Fraud Eradication**: Invoices are digitally certified by the tax authority (LHDN). Falsifying invoices now carries severe legal penalties equivalent to tax evasion.
+- **Clean Data Pipelines**: Every transaction is standardized, machine-readable, and verified at the source, eliminating the need for manual OCR or document collection.
 
----
-
-## 🚀 How It Works
-
-1. **Dashboard View**: View all active contractors and their outstanding Accounts Receivable.
-2. **Passport Evaluation**: Select a contractor to generate their Trade Passport. The engine simulates a sync with LHDN e-Invoice APIs and calculates a payment velocity score.
-3. **Actionable Insights**: The dashboard presents the contractor's health status. 
-4. **The CapBay Bridge**: If an invoice needs immediate liquidity, users can click **"Submit AR to CapBay"** to instantly request institutional financing based on the generated Trade Passport score.
+**eCredit Bridge is the first platform to convert this tax-mandated compliance data into active SME financing power.**
 
 ---
 
-## 🏆 Why It Wins
-**Trade Passport Engine** doesn't just assess risk—it actively bridges the gap between B2B suppliers and institutional financing. By integrating credit scoring directly into the delivery and invoicing workflow, we solve the cash flow bottleneck that has plagued the supply chain industry for decades.
+## 🛠️ Technical Architecture
 
-<br/>
+The following diagram illustrates how eCredit Bridge bridges the gap between supplier ERPs, LHDN registries, and financing institutions:
 
-<div align="center">
-  <i>Built with ❤️ for NexHack</i>
-</div>
+```mermaid
+graph TD
+    subgraph Supplier System (ERP/SaaS)
+        A[eCredit Bridge SPA] -->|ERP API Sync| B[Supplier Ledger Database]
+    end
+    
+    subgraph Government Registry
+        C[LHDN e-Invoice API Registry]
+    end
+    
+    subgraph eCredit Bridge Core Backend
+        D[Python Flask Risk Scoring Engine] -->|API Registry Validation| C
+        A -->|Request Client Rating| D
+        D -->|Calculates Credit Score 1000pts| A
+    end
+    
+    subgraph Institutional Financier
+        E[CapBay Funding Portal]
+        A -->|PDPA Consent & Bundle Routing| E
+        E -->|Direct Disbursal of Funds| B
+    end
+
+    style A fill:#f0fdf4,stroke:#1D9E75,stroke-width:2px;
+    style D fill:#eff6ff,stroke:#2563eb,stroke-width:2px;
+    style C fill:#fffbeb,stroke:#d97706,stroke-width:2px;
+    style E fill:#fef2f2,stroke:#dc2626,stroke-width:2px;
+```
+
+---
+
+## 🎯 How It Works
+
+### Step 1: e-Invoice & Bank Triangulation
+The supplier connects their ERP system. The platform automatically pulls e-Invoice data from LHDN, bank statement records, and Delivery Orders (DO). By matching these three sources, the platform validates transaction legitimacy and flags partial or unconfirmed items.
+
+### Step 2: Trade Passport Generation (1 Buyer = 1 Passport)
+The engine aggregates the data to construct a single, comprehensive **Trade Passport** for each buyer. This includes:
+- Transaction frequency and volume stability.
+- Historical payment timeliness (actual average payment velocity vs. promised credit terms).
+- Years of active trade relationship.
+- Matched LHDN/DO verification ratios.
+
+This score is calculated by our Flask-powered risk evaluator, providing financiers with objective data backed by LHDN registries.
+
+### Step 3: Bundle Financing & Direct-Pay Disbursement
+Suppliers check one or multiple verified outstanding invoices to package into a funding bundle under the buyer's passport. The platform requests PDPA consent from the buyer. Once signed, the bundle is routed to CapBay, who disburses funds **directly to the supplier's verified bank account**, mitigating default and diversion risk.
+
+---
+
+## 💰 Commercial Model
+
+We capture value through two distinct revenue streams:
+
+1. **SaaS Subscription (Supplier-side)**: Suppliers pay RM 200 - RM 500 / month to use eCredit Bridge as their core dashboard for tracking receivables, triggering auto-reminders, and performing bank reconciliation.
+2. **Factoring Commission (Financier-side)**: We charge financiers a **0.5% transaction commission** on all funded bundles routed through our platform.
+
+### Defensive Moat:
+Financing partners cannot easily bypass eCredit Bridge because the supplier's day-to-day operations and ledger reconciliations run on our platform. The migration cost for a supplier to move their operational data is exceptionally high.
+
+---
+
+## 🗺️ Roadmap & Implementation
+
+- **Q3 2026**: ERP plugin integration development (SQL, AutoCount, SQL Account) and initial sandbox testing with LHDN SDK.
+- **Q4 2026**: Pilot launch with selected construction suppliers and CapBay financing integration.
+- **Q1 2027**: General availability release in Malaysia, expanding into retail and manufacturing distribution channels.
