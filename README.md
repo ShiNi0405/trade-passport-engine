@@ -73,6 +73,8 @@ To ensure enterprise robustness, eCredit Bridge integrates directly with the off
 ### Step 1: e-Invoice & Bank Triangulation
 The supplier connects their ERP system. The platform automatically pulls e-Invoice data from LHDN, bank statement records, and Delivery Orders (DO). By matching these three sources, the platform validates transaction legitimacy and flags partial or unconfirmed items.
 
+*   **Interactive Audit Modal (MVP Demonstration)**: In the live dashboard (**Data in** tab), clicking any verified checkmark (`✓`) launches our document viewer modal. This displays the actual scanned B2B records: the official LHDN e-Invoice layout with QR code, matching bank statements, signed DOs with handwritten delivery logs (such as shortage notes), and site photographs of materials/lorries uploaded by logistics drivers to confirm delivery.
+
 ### Step 2: Trade Passport Generation (1 Buyer = 1 Passport)
 The engine aggregates the data to construct a single, comprehensive **Trade Passport** for each buyer. This includes:
 - Transaction frequency and volume stability.
