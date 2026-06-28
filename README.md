@@ -1,61 +1,146 @@
 <div align="center">
   
-# 🚀 Trade Passport Engine
-**Next-Generation Contractor Risk Assessment & Frictionless Financing**
+# 🌉 eCredit Bridge
+**Turning supply chain trust into financing power — backed by government data.**
 
-[![Python](https://img.shields.io/badge/Python-Flask-blue?logo=python&logoColor=white)](#)
-[![PHP](https://img.shields.io/badge/PHP-Frontend-777BB4?logo=php&logoColor=white)](#)
-[![TailwindCSS](https://img.shields.io/badge/TailwindCSS-Styling-38B2AC?logo=tailwind-css&logoColor=white)](#)
-[![Vercel](https://img.shields.io/badge/Vercel-Deployed-000000?logo=vercel&logoColor=white)](#)
+**NexHack 2026 | Track 2: Fintech Risk & Fraud Intelligence**
+
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Vercel-000000?style=for-the-badge&logo=vercel)](https://trade-passport-engine-ntk9kfp23-jijo-jijis-projects.vercel.app/)
+[![Pitch Deck](https://img.shields.io/badge/Pitch_Deck-PDF-red?style=for-the-badge&logo=adobeacrobatreader)](#)
+[![Demo Video](https://img.shields.io/badge/Demo_Video-YouTube-FF0000?style=for-the-badge&logo=youtube)](#)
 
 </div>
 
-<br/>
+---
 
-## 💡 The Problem
-In the construction and B2B supply chain industry, late payments and defaults are a massive problem. Suppliers take on 100% of the risk when delivering materials, often waiting 90+ days for payment, crippling their cash flow and stalling business growth.
+## 📌 Submission Links
+- **[Pitch Deck]**: *(Insert Link Here)*
+- **[7-Minute Demo Video]**: *(Insert Link Here)*
+- **[Live Application]**: [trade-passport-engine.vercel.app](https://trade-passport-engine-ntk9kfp23-jijo-jijis-projects.vercel.app/)
 
-## 🎯 Our Solution
-**Trade Passport Engine** is an intelligent risk-assessment and financial routing platform. It aggregates payment behaviors, historical data, and real-time **LHDN (Lembaga Hasil Dalam Negeri) e-Invoice** verification to generate a dynamic **"Trade Passport Health"** score for contractors.
+---
 
-By scoring contractors as **Prime, Amber, or Toxic**, our engine allows businesses to make data-driven decisions on whether to extend credit, demand cash upfront, or instantly route invoices to institutional financing partners.
+## ⚠️ The Problem: The Blindspot & The Rate Problem
+
+B2B supply chains, particularly in hardware and construction, operate as a "free ATM." Suppliers (like Defong/Apex Enterprise) face massive cash flow pressure, with millions locked in receivables (e.g., RM 1.4M locked out of RM 8M revenue).
+
+- **The Visibility Problem**: Financiers cannot assess SME credit risk because traditional records are scattered (paper invoices, DO slips in boxes, WhatsApp confirmations).
+- **The Rate Problem**: Because financiers face "blind risk," they charge high factoring interest rates. This destroys distributor margins (often <1%), meaning the cost of unlocking cash exceeds the benefit.
+
+## 💡 The Solution: eCredit Bridge
+
+**We do one thing: We act as the Data Layer between Trust and Financing.**
+
+Leveraging Malaysia's **2024 LHDN e-invoice mandate**, we translate tacit SME relationships into institutional-grade credit data. By cross-referencing LHDN data with bank statements and delivery receipts, we generate a **Trade Passport**.
+
+✅ **We never hold funds.**  
+✅ **We require no lending license.**  
+✅ **We eradicate blind risk premiums, enabling sustainable financing rates.**
+
+---
+
+## 🎯 Target Users & Market
+
+Our initial target users are traditional SME hardware distributors and specialist contractors who suffer from heavy Accounts Receivable (AR) bleed.
+
+- **TAM (The Unicorn Vision):** RM 340B+ (All B2B Trade Credit in Malaysia/SEA)
+- **SAM (The Focus Area):** RM 45B (Construction & Hardware Supply)
+- **SOM (The Survival Line):** First 50 Nodes (Defong's Immediate Network in Johor Bahru). 150 distributors x RM 500k avg AR = RM 375M fundable pool.
 
 ---
 
 ## ✨ Key Features
 
-- **📊 Dynamic Trade Passport Metrics**: Analyzes Transaction Frequency, Payment Habits (promised vs. actual payment days), Years of Cooperation, and Invoice Amount Trends.
-- **🏛️ Real-time LHDN e-Invoice Sync (Simulated)**: Leverages official tax data to verify transaction legitimacy and ensure compliance.
-- **🚦 Smart Triage Router**: 
-  - 🟢 **Prime**: Frictionless processing for highly reliable payers.
-  - 🟡 **Amber**: Cautionary processing highlighting a history of late payments.
-  - 🔴 **Toxic**: High-default risk alerts requiring explicit manual override to proceed with delivery.
-- **💸 Seamless Institutional Financing**: One-click integration to instantly route eligible Accounts Receivable (AR) to financing partners (like CapBay) for immediate cash flow.
+- **🛡️ The Unbreakable Trinity**: Fraud is prevented by requiring a 3-way match: LHDN e-Invoices + Bank Reconciliation + Confirmed Delivery Orders (DO). Falsifying this requires hacking the national tax system.
+- **📈 Dynamic Credit Scoring**: The engine processes payment timeliness, transaction frequency, cooperation history, and volume trends to generate a real-time score (e.g., `PRIME`, `AMBER`, `TOXIC`).
+- **📑 Automated Tear Sheets**: Packages verified assets and submits them directly to third-party financiers (e.g., CapBay) with explicit PDPA consent.
 
 ---
 
-## 🛠️ Tech Stack
+## 💰 Pricing & Business Model
 
-- **Frontend**: PHP, HTML5, TailwindCSS (for a sleek, modern, and responsive UI)
-- **Backend**: Python (Flask API, handling the logic and algorithmic scoring)
-- **Deployment**: Vercel (`vercel.json` configured for seamless serverless deployment)
+Two revenue lines, zero lending risk.
 
----
+### Line 1: SaaS (Supplier Pays)
+- **Pricing**: Monthly fee of RM 200 - RM 500.
+- **Value**: AR management, reconciliation, and debt-tracking tools.
+- **Moat**: Daily operations run on our platform, making switching costs extremely high.
 
-## 🚀 How It Works
-
-1. **Dashboard View**: View all active contractors and their outstanding Accounts Receivable.
-2. **Passport Evaluation**: Select a contractor to generate their Trade Passport. The engine simulates a sync with LHDN e-Invoice APIs and calculates a payment velocity score.
-3. **Actionable Insights**: The dashboard presents the contractor's health status. 
-4. **The CapBay Bridge**: If an invoice needs immediate liquidity, users can click **"Submit AR to CapBay"** to instantly request institutional financing based on the generated Trade Passport score.
+### Line 2: Factoring Commission (Financier Pays)
+- **Pricing**: 0.5% per funded transaction.
+- **Value**: Charged to financiers (e.g., CapBay). We hand them verified SME assets they mathematically could not otherwise access.
 
 ---
 
-## 🏆 Why It Wins
-**Trade Passport Engine** doesn't just assess risk—it actively bridges the gap between B2B suppliers and institutional financing. By integrating credit scoring directly into the delivery and invoicing workflow, we solve the cash flow bottleneck that has plagued the supply chain industry for decades.
+## ⚙️ Technical Architecture
 
-<br/>
+Our MVP is a lightweight, serverless application designed for rapid data processing and API handoffs.
 
+- **Frontend**: PHP & TailwindCSS Single Page Application (Advisory Dashboard).
+- **Backend**: Python (Flask) Serverless API deployed on Vercel.
+- **Logic Engine**: Evaluates "Velocity Math" (Promised vs. Actual Payment Days) combined with historical transaction frequency to route AR into specific risk tranches.
+
+### Workflow Diagram
+
+```mermaid
+graph TD
+    subgraph Raw Data Input
+        A[LHDN e-Invoice API <br/> Timestamp] --> D
+        B[Bank Statement API <br/> Clearing] --> D
+        C[e-Delivery Order <br/> Dispute Window] --> D
+    end
+
+    subgraph eCredit Bridge Backend Engine
+        D{Process A: <br/> Timestamp Reconciliation} --> E
+        E{Process B: <br/> AR & Cashflow Profiling} --> F
+        F((Output: Trade Passport <br/> Velocity Score))
+    end
+
+    subgraph Triage Decision
+        F -->|Score > 85%| G(🟢 PRIME: Approve for Premium Financing via CapBay)
+        F -->|Score 50-84%| H(🟡 AMBER: Standard Financing / Require Deposit)
+        F -->|Score < 50%| I(🔴 TOXIC: Reject. Defong holds 100% Risk)
+    end
+    
+    classDef prime fill:#d1fae5,stroke:#059669,stroke-width:2px,color:#065f46
+    classDef amber fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#92400e
+    classDef toxic fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#991b1b
+    
+    class G prime
+    class H amber
+    class I toxic
+```
+
+> **Note for Judges**: A detailed technical architecture diagram is also included in our pitch presentation deck.
+
+---
+
+## 🚀 Running the Project Locally
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/jijo-jiji/trade-passport-engine.git
+   cd trade-passport-engine
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **Run the Flask backend (API):**
+   ```bash
+   python api/index.py
+   ```
+
+4. **Run the Frontend (PHP):**
+   Start a local PHP server in the root directory:
+   ```bash
+   php -S localhost:8000
+   ```
+   Then open `http://localhost:8000` in your browser.
+
+---
 <div align="center">
-  <i>Built with ❤️ for NexHack</i>
+  <i>Built with ❤️ for NexHack 2026</i>
 </div>
