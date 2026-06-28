@@ -115,6 +115,27 @@ graph TD
 
 ---
 
+## 🔌 LHDN MyInvois SDK API Mapping
+
+To ensure enterprise robustness, eCredit Bridge integrates directly with the official Malaysian tax authority APIs. Below is the mapping of consumed LHDN SDK endpoints implemented in our pipeline:
+
+| Integration Phase | SDK API Endpoint | Method | Purpose & Params |
+|---|---|---|---|
+| **1. Authentication** | `/connect/token` | `POST` | Authenticates eCredit Bridge with LHDN Identity Server using `grant_type=client_credentials` and `scope=InvoicingAPI`. |
+| **2. Identity Validation** | `/api/v1.0/taxpayer/validate/{tin}` | `GET` | Validates downstream buyer registration details by checking their TIN against active SSM registry data (`idType`, `idValue`). |
+| **3. Real-time Ingestion** | `/api/v1.0/documents/recent` | `GET` | Pulls verified e-Invoices issued between the supplier and buyers, filtering by `submissionDateFrom` and `status=Valid`. |
+| **4. Fraud Reconciliation** | `/api/v1.0/documents/{uuid}/details` | `GET` | Retrieves full cryptographic e-Invoice hashes and status metadata to prevent double-financing and verify billing terms. |
+
+---
+
+## 🗺️ Roadmap & Implementation
+
+- **Q3 2026**: ERP plugin integration development (SQL, AutoCount, SQL Account) and initial sandbox testing with LHDN SDK.
+- **Q4 2026**: Pilot launch with selected construction suppliers and CapBay financing integration.
+- **Q1 2027**: General availability release in Malaysia, expanding into retail and manufacturing distribution channels.
+
+---
+
 ## 🚀 Running the Project Locally
 
 1. **Clone the repository:**
